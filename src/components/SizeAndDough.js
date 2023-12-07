@@ -32,7 +32,6 @@ function SizeAndDough(props) {
     }
     .selectButton {
       width: 60%;
-      height: 50%;
     }
     .boyutYazisi {
       margin-bottom: 30px;

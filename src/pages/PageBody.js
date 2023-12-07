@@ -2,7 +2,7 @@ import React from "react";
 import { Route, Switch } from "react-router-dom";
 import AnaSayfa from "./AnaSayfa";
 import SiparisForm from "./SiparisForm";
-
+import Success from "./Success";
 function PageBody() {
   return (
     <Switch>
@@ -11,6 +11,9 @@ function PageBody() {
       </Route>
       <Route path="/pizza" name="PizzaOrder" exact>
         <SiparisForm />
+      </Route>
+      <Route path="/success" name="Success" exact>
+        <Success />
       </Route>
     </Switch>
   );
