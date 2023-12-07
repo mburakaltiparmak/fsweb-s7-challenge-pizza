@@ -5,7 +5,7 @@ import styled from "styled-components";
 function SizeAndDough(props) {
   let boyutText = "Boyut Seç";
   let hamurText = "Hamur Seç";
-  const options = [
+  const HamurSecimi = [
     { target: { value: "İnce", name: "dough" }, label: "İnce" },
     { target: { value: "Orta", name: "dough" }, label: "Orta" },
     { target: { value: "Kalın", name: "dough" }, label: "Kalın" },
@@ -82,7 +82,7 @@ function SizeAndDough(props) {
           <p className="HamurYazi">{hamurText}</p>
           <div className="selectButton">
             <Select
-              options={options}
+              options={HamurSecimi}
               onChange={onInputChange}
               isSearchable={false}
               styles={customStyles}
