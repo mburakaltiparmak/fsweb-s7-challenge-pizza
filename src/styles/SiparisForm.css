@@ -1,0 +1,42 @@
+.order-container {
+    margin:auto;
+    width: 35%;
+    display: block;
+}
+
+.pizza-select {
+    display: flex;
+}
+
+.label {
+    margin-right: auto;
+}
+
+.ingredient-select {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.ingredient-select > label{
+    width: 30%;
+}
+
+.flex-container{
+    display: flex;
+}
+
+.count-label{
+    display: flex;
+    align-items: center;
+}
+
+.count-label > button{
+    background-color: yellow;
+    height: 40px;
+    width: 40px;
+}
+
+.count-label > p{
+    font-size: 35px;
+    margin: 10px;
+}
