@@ -4,6 +4,14 @@ import styled from "styled-components";
 import myImage from "../mvp-banner.png";
 
 const StyledApp = styled.div`
+  background-color: #ce2829;
+  height: 100%;
+`;
+
+const Container = styled.div`
+  text-align: center;
+  color: white;
+  margin-top: 75px;
   background-image: url(${myImage});
   background-size: cover;
   margin: auto;
@@ -11,18 +19,13 @@ const StyledApp = styled.div`
   overflow: hidden;
 `;
 
-const Container = styled.div`
-  text-align: center;
-  color: white;
-  margin-top: 75px;
-`;
-
 const Title = styled.h1`
-  font-family: "Barlow", sans-serif; /* index.js'teki import sonrası font-family yazılması yeterli. */
+  font-family: "Barlow", sans-serif;
   color: white;
-  font-size: 40px;
-  width: 25%;
-  margin: 0 auto;
+  font-size: 50px;
+  width: 30%;
+  margin: 30px auto;
+  font-weight: 500;
 `;
 
 const Button = styled.button`
@@ -36,6 +39,7 @@ const Button = styled.button`
   padding: 1em 2em;
   text-decoration: none;
   font-weight: bold;
+  cursor: pointer;
 `;
 
 function AnaSayfa() {
@@ -44,7 +48,7 @@ function AnaSayfa() {
       <Container>
         <Title>KOD ACIKTIRIR, PİZZA DOYURUR</Title>
         <NavLink to="/pizza" style={{ textDecoration: "none" }}>
-          <Button>ACIKTIM</Button>
+          <Button id="order-pizza">ACIKTIM</Button>
         </NavLink>
       </Container>
     </StyledApp>

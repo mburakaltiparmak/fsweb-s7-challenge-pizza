@@ -1,109 +1,141 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styled from "styled-components";
-const SubmitStyling = styled.div`
-  display: flex;
-  flex-direction: flex-end;
-  justify-content: space-between;
-`;
+export default function Submit(props) {
+  const {
+    icerikFiyati,
+    malzeme,
+    isValid,
+    handleSubmit,
+    pizza,
+    artirici,
+    azaltici,
+    toplam,
+  } = props;
 
-const PlusMinusButton = styled.div`
-  display: flex;
-  border: 0.5px solid;
-  border-radius: 10px;
-  box-sizing: border-box;
-  width: 105px;
-  height: 40px;
-  flex-direction: center;
-  justify-content: center;
-  margin-right: 10px;
-  .count-label {
+  const malzemeSiniriAsildi =
+    malzeme.length >= 10
+      ? "En fazla 10 malzeme seçebilirsiniz!"
+      : malzeme.length < 4
+      ? "En az 4 malzeme seçmelisiniz!"
+      : "";
+  function secimlerFiyat() {
+    if (malzeme.length > 5) {
+      const ekFiyat = icerikFiyati * (malzeme.length - 5);
+      return ekFiyat;
+    } else {
+      return 0;
+    }
+  }
+  ///Stylingler
+
+  const SubmitStyling = styled.div`
     display: flex;
-    align-items: center;
-    justify-content: space-around;
+    width: 75vh;
+    form {
+      width: 75vh;
+      display: flex;
+      justify-content: space-between;
+    }
+  `;
 
-    button {
-      border: 0.5px solid;
+  const PlusMinusButton = styled.div`
+    padding: 5px 5px;
+    width: 100px;
+    height: 40px;
+    border: 0.1px solid;
+    border-radius: 10px;
+    margin-right: 150px;
+    .artir {
+      border: 0.1px solid;
+      border-radius: 10px;
+      background-color: #fdc913;
+    }
+    .azalt {
+      border: 0.1px solid;
       border-radius: 10px;
       background-color: #fdc913;
     }
     p {
-      font-size: 20px;
+      font-size: 15px;
+      font-weight: bold;
     }
-  }
-`;
+  `;
 
-const SiparisToplami = styled.div`
-  border: 0.1px solid;
-  border-radius: 10px;
-  box-sizing: border-box;
-  text-align: center;
-  width: 50%;
-`;
+  const SiparisToplami = styled.div`
+    padding: 1px;
+    margin: auto;
+    border: 0.1px solid;
+    border-radius: 10px;
+    width: 50vh;
+    max-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    h2 {
+      display: flex;
+      justify-content: space-between;
+      margin-left: 25px;
+    }
+    p {
+      padding: 1px 25px;
+      display: flex;
+      justify-content: space-around;
+    }
 
-const SubmitButton = styled.button`
-  width: 100%;
-  border: 0.1px solid;
-  border-radius: 10px;
-  box-sizing: border-box;
-  height: 40px;
-  background-color: #fdc913;
-  color: black;
-  font-family: "Barlow", sans-serif;
-  font-weight: bold;
-  font-size: 15px;
-`;
-function Submit(props) {
-  const minOrderAmount = 1;
-  const onSubmitHandler = props.onSubmitHandler;
-  const isValid = props.isValid;
-  const pizza = props.pizza;
-  const pizzaPrice = props.pizzaPrice;
-  const ingredientCost = props.ingredientCost;
-
-  const [orderAmount, setOrderAmount] = useState(minOrderAmount);
-  const [price, setPrice] = useState(pizzaPrice);
-  const [ingPrice, setIngPrice] = useState(0);
-  console.log(price);
-  console.log(ingPrice);
-
-  useEffect(() => {
-    setIngPrice(pizza.ingredientCount * ingredientCost);
-    console.log(ingPrice);
-  }, [pizza]);
-
-  const onOrderAmountClick = (e) => {
-    setOrderAmount(
-      e.target.value === "+"
-        ? orderAmount + 1
-        : orderAmount - 1 >= minOrderAmount
-        ? orderAmount - 1
-        : minOrderAmount
-    );
-  };
+    span {
+      display: inline-block;
+      width: 100%;
+      text-align: right;
+    }
+  `;
+  const SubmitButton = styled.button`
+    padding: 15px;
+    border: 0.1px solid;
+    border-radius: 10px;
+    background-color: ${(props) => (props.disabled ? "#ff0000" : "#fdc913")};
+    color: ${(props) => (props.disabled ? "white" : "black")};
+    font-family: "Barlow", sans-serif;
+    font-weight: bold;
+    font-size: 15px;
+    width: 100%;
+    cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
+  `;
 
   return (
-    <SubmitStyling>
-      <PlusMinusButton>
-        <label className="count-label">
-          <button className="azalt" value="-" onClick={onOrderAmountClick}>
-            -
-          </button>
-          <p>{orderAmount}</p>
-          <button className="artir" value="+" onClick={onOrderAmountClick}>
-            +
-          </button>
-        </label>
-      </PlusMinusButton>
+    <SubmitStyling id="submit-styling">
+      <form onSubmit={handleSubmit} id="order-form">
+        <PlusMinusButton>
+          <label className="count-label">
+            <button className="azalt" value="-" onClick={azaltici}>
+              -
+            </button>
+            <p>{pizza}</p>
+            <button className="artir" value="+" onClick={artirici}>
+              +
+            </button>
+          </label>
+        </PlusMinusButton>
 
-      <SiparisToplami>
-        <h2>Sipariş Toplamı</h2>
-        <p>Seçimler {pizza.ingredientCount}</p>
-        <p>Toplam {price}</p>
-        <label name="submit" onSubmit={onSubmitHandler}></label>
-        <SubmitButton disabled={!isValid}>SİPARİŞ VER</SubmitButton>
-      </SiparisToplami>
+        <SiparisToplami>
+          <h2>Sipariş Toplamı</h2>
+          <p>{malzemeSiniriAsildi}</p>
+          <p>
+            Seçimler: <span> {secimlerFiyat(malzeme)} ₺</span>
+          </p>
+          <p>
+            Toplam: <span>{toplam} ₺ </span>
+          </p>
+          <label name="submit">
+            <SubmitButton
+              id="order-button"
+              type="submit"
+              disabled={malzeme.length <= 4 || !isValid}
+            >
+              SİPARİŞ VER
+            </SubmitButton>
+          </label>
+        </SiparisToplami>
+      </form>
     </SubmitStyling>
   );
 }
-
-export default Submit;

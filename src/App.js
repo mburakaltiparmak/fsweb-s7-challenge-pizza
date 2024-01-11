@@ -2,6 +2,7 @@ import React from "react";
 import Header from "./layout/Header";
 import { BrowserRouter } from "react-router-dom";
 import PageBody from "./pages/PageBody";
+import Footer from "./layout/Footer";
 
 const App = () => {
   return (
@@ -9,6 +10,7 @@ const App = () => {
       <BrowserRouter>
         <Header />
         <PageBody />
+        <Footer />
       </BrowserRouter>
     </div>
   );
